@@ -1,6 +1,7 @@
 // Dependencies
 var express = require("express");
 var exphbs = require("express-handlebars");
+var bodyParser = require("body-parser");
 var path = require("path")
 
 // Create an instance of the express app.
@@ -9,6 +10,9 @@ var app = express();
 // Set the port of our application
 // process.env.PORT lets the port be set by Heroku
 var PORT = process.env.PORT || 8080;
+
+// Requiring our models for syncing
+var db = require("./models");
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,7 +32,9 @@ require("./routes/htmlRoutes.js")(app);
 
 
 // Start our server so that it can begin listening to client requests.
-app.listen(PORT, function () {
-  // Log (server-side) when our server has started
-  console.log("Server listening on: http://localhost:" + PORT);
+db.sequelize.sync({ force: true }).then(function () {
+  app.listen(PORT, function () {
+    // Log (server-side) when our server has started
+    console.log("Server listening on: http://localhost:" + PORT);
+  });
 });
