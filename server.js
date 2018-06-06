@@ -10,26 +10,25 @@ var app = express();
 // process.env.PORT lets the port be set by Heroku
 var PORT = process.env.PORT || 8080;
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+// parse application/json
+app.use(bodyParser.json());
+
+
+// Static directory
 app.use(express.static("public"));
 // Set Handlebars as the default templating engine.
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Routes
-app.get("/", function(req, res) {
-  res.render("index");
-});
 
-app.get("/aboutus", function(req, res) {
-  res.render("aboutUs");
-});
+//Routes
+require("./routes/htmlRoutes.js")(app);
 
-app.get("/upload", function(req, res) {
-    res.render("upload");
-  });
 
 // Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   // Log (server-side) when our server has started
   console.log("Server listening on: http://localhost:" + PORT);
 });
