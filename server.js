@@ -11,6 +11,7 @@ var app = express();
 // process.env.PORT lets the port be set by Heroku
 var PORT = process.env.PORT || 8080;
 
+
 // Requiring our models for syncing
 var db = require("./models");
 
@@ -38,3 +39,4 @@ db.sequelize.sync({ force: true }).then(function () {
     console.log("Server listening on: http://localhost:" + PORT);
   });
 });
+
