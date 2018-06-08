@@ -1,8 +1,9 @@
 module.exports = function (sequelize, DataTypes) {
   var Scores = sequelize.define("Scores", {
-    gameName: DataTypes.STRING,
+    // required
+    gameId: DataTypes.Integer,
     scoreHolder: DataTypes.STRING,
-    highScore: DataTypes.INTEGER
+    score: DataTypes.INTEGER
   });
   return Scores;
 };
