@@ -34,8 +34,7 @@ window.onclick = function (event) {
 
 
 btn.addEventListener("click", function () {
-
-    // The DOM-element which will hold the playfield
+    console.log(btn.value);
     // If you are using jQuery, you can use < var element = $("#parent"); > instead
     var parentElement = document.getElementById("parent");
     // User defined settings overrides default settings.

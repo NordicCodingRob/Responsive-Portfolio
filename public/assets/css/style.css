@@ -174,3 +174,8 @@ footer{
     text-decoration: none;
     cursor: pointer;
 }
+
+button{
+    padding: 0;
+    border: 0;
+}
