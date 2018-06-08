@@ -1,3 +1,32 @@
+// Google Authentication for the user-login
+
+var provider = new firebase.auth.GoogleAuthProvider();
+
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+firebase.auth().languageCode = 'pt';
+
+provider.setCustomParameters({
+    'login_hint': 'youremail@gmail.com'
+});
+firebase.auth().signInWithPopup(provider).then(function (result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+}).catch(function (error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // Provides a notice of error with credentials/verification
+});
+
+
 function removeElement(elementId) {
     // Removes an element from the document
     var element = document.getElementById(elementId);
@@ -12,7 +41,7 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
 btn.onclick = function () {
     modal.style.display = "block";
 }
