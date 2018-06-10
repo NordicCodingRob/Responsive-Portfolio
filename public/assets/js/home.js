@@ -51,6 +51,9 @@ $(".myBtn").click(function(){
     else if (btn.val() == 2){
         createT();
     }
+    else if (btn.val() == 3){
+        createMemory();
+    }
 
    
 })
@@ -98,4 +101,23 @@ var createT = function () {
     </div>'
     tetrisCreate();
 };
+
+var createMemory = function () {
+    parentElement.innerHTML = 
+    '<div class="gameContainer">\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    <div class="card unmatched"></div>\
+    </div>'
+    runMemory();
+}
 
