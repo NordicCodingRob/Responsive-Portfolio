@@ -30,42 +30,48 @@
 function removeElement(elementId) {
     // Removes an element from the document
     var element = document.getElementById(elementId);
-    element.parentNode.removeChild(element);
+    element.removeChild(element.childNodes[0]);
 }
 // Get the modal
 var modal = document.getElementById('myModal');
+var span = document.getElementsByClassName("close")[0];
+var parentElement = document.getElementById("parent");
+
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = ""
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal
-btn.onclick = function () {
-    modal.style.display = "block";
-}
+$(".myBtn").click(function(){
+    modal.style.display = "flex";
+    btn = $(this);
+    if (btn.val() == 1){
+        createSnake();
+    }
+    else if (btn.val() == 2){
+        createT();
+    }
+
+   
+})
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
-    removeElement("snake-js");
+    removeElement("parent")
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
-        removeElement("snake-js");
+        removeElement("parent")
     }
 }
 // If you are using jQuery, use < $(document).ready(function(){ ... }) > instead
 
 
-btn.addEventListener("click", function () {
-    console.log(btn.value);
-    // If you are using jQuery, you can use < var element = $("#parent"); > instead
-    var parentElement = document.getElementById("parent");
+var createSnake = function(){
     // User defined settings overrides default settings.
     // See snake-js.js for all available options.
     var settings = {
@@ -76,4 +82,20 @@ btn.addEventListener("click", function () {
     // The parentElement however is required
     var game = new SnakeJS(parentElement, settings);
 
-}, false);
+};
+
+var createT = function () {
+    parentElement.innerHTML = 
+    '<div id="tetris">\
+        <div id="menu">\
+            <p id="start"><a href="javascript:play();">Press Space to Play.</a></p>\
+            <p><canvas id="upcoming"></canvas></p>\
+            <p>score <span id="score">00000</span></p>\
+            <p>rows <span id="rows">0</span></p>\
+        </div>\
+        <canvas id="canvas">\
+        </canvas>\
+    </div>'
+    tetrisCreate();
+};
+
