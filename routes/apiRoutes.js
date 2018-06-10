@@ -50,4 +50,16 @@ module.exports = function (app) {
         });
     });
 
+    app.put("/api/scores", function (req, res) {
+        db.Scores.update(
+            req.body,
+            {
+                where: {
+                    id: req.body.id
+                }
+            }).then(function (scores) {
+                res.json(scores)
+            });
+    });
+
 };
