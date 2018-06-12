@@ -63,6 +63,10 @@ header a:hover{
     font-weight: bold;   
 }
 
+.video {
+    cursor: pointer;
+}
+
 #Showcase{
     min-height: 400px;
     background: url('http://mikereidphotography.com/Seattle%20and%20Surroundings%20Photography/slides/Seattle%20Skyline%20Night.jpg') 800px 500px;
