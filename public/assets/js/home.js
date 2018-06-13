@@ -125,8 +125,11 @@ var createMemory = function () {
 }
 
 var createPong = function () {
+
     parentElement.innerHTML =
-        <canvas id="gameCanvas" width="600" height="400"></canvas>
+        '<canvas id="gameCanvas" width="600" height="400"></canvas>'
+    console.log("test123")
     runPong();
+
 }
 

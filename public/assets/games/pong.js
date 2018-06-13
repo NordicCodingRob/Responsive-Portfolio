@@ -13,6 +13,7 @@ var runPong = function () {
     var paddle2Y = 250;
     var PADDLE_HEIGHT = 100;
     var PADDLE_WIDTH = 10;
+    canvas = document.getElementById('gameCanvas');
     function calculateMousePos(evt) {
         var rect = canvas.getBoundingClientRect();
         var root = document.documentElement;
@@ -32,23 +33,20 @@ var runPong = function () {
             showingWinScreen = false;
         }
     }
-    window.onload = function () {
-        canvas = document.getElementById('gameCanvas');
-        canvasContext = canvas.getContext('2d');
-        var framesPerSecond = 30;
-        // calls drawEverything in intervals of 1000 ms
-        setInterval(function () {
-            moveEverything();
-            drawEverything();
-        }, 1000 / framesPerSecond);
-        canvas.addEventListener('mousedown', handleMouseClick);
-        canvas.addEventListener('mousemove',
-            function (evt) {
-                var mousePos = calculateMousePos(evt);
-                // center paddle position with mouse
-                paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
-            });
-    }
+    canvasContext = canvas.getContext('2d');
+    var framesPerSecond = 30;
+    // calls drawEverything in intervals of 1000 ms
+    setInterval(function () {
+        moveEverything();
+        drawEverything();
+    }, 1000 / framesPerSecond);
+    canvas.addEventListener('mousedown', handleMouseClick);
+    canvas.addEventListener('mousemove',
+        function (evt) {
+            var mousePos = calculateMousePos(evt);
+            // center paddle position with mouse
+            paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
+        });
     function ballReset() {
         if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
             showingWinScreen = true;
