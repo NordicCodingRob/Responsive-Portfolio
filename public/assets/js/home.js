@@ -42,20 +42,23 @@ var parentElement = document.getElementById("parent");
 var btn = ""
 
 
-$(".myBtn").click(function(){
+$(".myBtn").click(function () {
     modal.style.display = "flex";
     btn = $(this);
-    if (btn.val() == 1){
+    if (btn.val() == 1) {
         createSnake();
     }
-    else if (btn.val() == 2){
+    else if (btn.val() == 2) {
         createT();
     }
-    else if (btn.val() == 3){
+    else if (btn.val() == 3) {
         createMemory();
     }
+    else if (btn.val() == 4) {
+        createPong();
+    }
 
-   
+
 })
 
 // When the user clicks on <span> (x), close the modal
@@ -74,7 +77,7 @@ window.onclick = function (event) {
 // If you are using jQuery, use < $(document).ready(function(){ ... }) > instead
 
 
-var createSnake = function(){
+var createSnake = function () {
     // User defined settings overrides default settings.
     // See snake-js.js for all available options.
     var settings = {
@@ -88,8 +91,8 @@ var createSnake = function(){
 };
 
 var createT = function () {
-    parentElement.innerHTML = 
-    '<div id="tetris">\
+    parentElement.innerHTML =
+        '<div id="tetris">\
         <div id="menu">\
             <p id="start"><a href="javascript:play();">Press Space to Play.</a></p>\
             <p><canvas id="upcoming"></canvas></p>\
@@ -103,8 +106,8 @@ var createT = function () {
 };
 
 var createMemory = function () {
-    parentElement.innerHTML = 
-    '<div class="gameContainer">\
+    parentElement.innerHTML =
+        '<div class="gameContainer">\
     <div class="card unmatched"></div>\
     <div class="card unmatched"></div>\
     <div class="card unmatched"></div>\
@@ -119,5 +122,14 @@ var createMemory = function () {
     <div class="card unmatched"></div>\
     </div>'
     runMemory();
+}
+
+var createPong = function () {
+
+    parentElement.innerHTML =
+        '<canvas id="gameCanvas" width="600" height="400"></canvas>'
+    console.log("test123")
+    runPong();
+
 }
 
