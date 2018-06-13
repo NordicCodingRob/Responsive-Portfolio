@@ -33,20 +33,22 @@ var runPong = function () {
             showingWinScreen = false;
         }
     }
-    canvasContext = canvas.getContext('2d');
-    var framesPerSecond = 30;
-    // calls drawEverything in intervals of 1000 ms
-    setInterval(function () {
-        moveEverything();
-        drawEverything();
-    }, 1000 / framesPerSecond);
-    canvas.addEventListener('mousedown', handleMouseClick);
-    canvas.addEventListener('mousemove',
-        function (evt) {
-            var mousePos = calculateMousePos(evt);
-            // center paddle position with mouse
-            paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
-        });
+    canvas.onclick = function() {
+        canvasContext = canvas.getContext('2d');
+        var framesPerSecond = 30;
+        // calls drawEverything in intervals of 1000 ms
+        setInterval(function () {
+            moveEverything();
+            drawEverything();
+        }, 1000 / framesPerSecond);
+        canvas.addEventListener('mousedown', handleMouseClick);
+        canvas.addEventListener('mousemove',
+            function (evt) {
+                var mousePos = calculateMousePos(evt);
+                // center paddle position with mouse
+                paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
+            });
+    }
     function ballReset() {
         if (player1Score >= WINNING_SCORE || player2Score >= WINNING_SCORE) {
             showingWinScreen = true;

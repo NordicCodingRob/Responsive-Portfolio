@@ -1,11 +1,11 @@
-* {
+.gameContainer * {
     box-sizing: border-box;
   }
   
   .gameContainer {
     width: 1080px;
     margin: 0 auto;
-  }
+  } 
   
   .card {
     float: left;
