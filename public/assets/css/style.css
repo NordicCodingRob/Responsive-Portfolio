@@ -1,135 +1,573 @@
-.container{
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-}
+@import 'https://fonts.googleapis.com/css?family=Ubuntu';
+
 
 html {
-    min-height: 100%;
+  box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    padding: 0;
-    margin: 0;
-    background-color: navy;
-    min-height: 100%;
+/* *, *:before, *:after {
+  box-sizing: inherit;
+} */
+
+section {
+  padding-left: 80px;
+  padding-right: 80px;
+  
 }
 
 
-header{
-    background: gray;
-    color: #ffffffff;
-    padding-top: 30px;
-    min-height: 70px;
-    border-bottom:  limegreen 3px solid;
+html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, ol, ul, li, form, legend, label, table, header, footer, nav, figure {
+  margin: 0;
+  padding: 0;
 }
 
-header a{
-    color: limegreen;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
+header, footer, nav, section, article, hgroup, figure {
+  display: block;
 }
 
-header ul{
-    margin: 0;
-    padding: 0;
+header {
+  background: linear-gradient( cornflowerblue, #fff);
+  /* border-bottom: #00244C 3px solid; */
+  height: 90%;
 }
 
-header li{
-    display: inline;
-    padding: 0 20px 0 20px;
-}
-
-header #Brand {
-    float: left;   
-    margin: 0;
-}
-
-header nav{
-    float: right;
-}
-
-header .highlight, header .current a{
-    color: limegreen;
-    font-weight: bold;
-}
-
-header a:hover{
-    color: black;
-    font-weight: bold;   
-}
-
-.video {
+#logo {
+  
+    float: left;
+    width: 250px;
+    height: 110px;
+    background: transparent;
+    margin-left: 100px;
     cursor: pointer;
 }
 
-#Showcase{
-    min-height: 400px;
-    background: url('http://mikereidphotography.com/Seattle%20and%20Surroundings%20Photography/slides/Seattle%20Skyline%20Night.jpg') 800px 500px;
-    text-align: center;
-    opacity: 30%;
-    color: #00000000;
+.hero {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100%;
+  height: 20%;
+  position: relative;
 }
 
-#Newsletter{
-    padding: 15px;
-    color: #ffffffff;
-    background: limegreen;
-    margin-top:-20px;
-    margin-bottom: 50px;
 
+h3 {
+  color: #fff;
+  font-family: 'Comfortaa', cursive;
+  text-shadow: 1px 1px 2px #fff, 0 0 25px cornflowerblue, 0 0 5px blue;
 }
 
-#Newsletter h1{
- float: right;
- margin-top: 5px;
+p {
+  font-family: 'Comfortaa', cursive;
+  
 }
 
-#Newsletter input[type=email]{
-    padding: 4px;
-    height: 25px;
-    width: 250px;
-    margin: unset;
+
+ .canvas-bg {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
 }
 
-.button1{
-    height: 38px;
-    background: black;
-    border: 0;
-    padding-left: 20px;
-    padding-right: 20px;
-    color: white;
-    float: right;
+body {
+  
+  font-size: 100%;
+  line-height: 1.5;
+  position: relative;
+  z-index: -2;
+  
+}
+
+.box {
+  background: #fff;
 }
 
 #boxes {
-    margin-top: 20px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  margin-top: 40px;
+  
 }
 
-#boxes .box{
-    float: left;
-    width: 30%;
-    padding: 10px;
-    text-align: center; 
-    color: cornflowerblue;         
+
+
+img {
+  margin-right: 100px;
+  
 }
 
-footer{
-    padding: 20px;
-    margin-top: 20px;
-    color: black;
-    background-color: limegreen;
-    text-align: center;
-    margin-bottom: 0%
+
+
+
+#our-story {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  max-width: 1200px;
+
+  
+}
+#our-team {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  max-width: 1200px;
+  
 }
 
- /* The Modal (background) */
 
-.modal {
+
+
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1200px;
+ 
+}
+
+
+
+.hero:after {
+  content: '';
+  background: #f1f1f1;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 20%;
+}
+
+.hero * {
+  position: relative;
+  z-index: 1;
+}
+
+#masthead {
+  padding: 2.5em 0;
+  position: relative;
+}
+
+#masthead.is-active {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+}
+
+#masthead:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#masthead.is-active:after {
+  opacity: 1;
+}
+
+/*!
+ * Hamburgers
+ * @description Tasty CSS-animated hamburgers
+ * @author Jonathan Suh @jonsuh
+ * @site https://jonsuh.com/hamburgers
+ * @link https://github.com/jonsuh/hamburgers
+ */
+.hamburger {
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  font: inherit;
+  margin: 2.3em 0 0;
+  overflow: visible; 
+  outline: none;
+  padding: 0;
+  text-transform: none;
+  transition: opacity 0.15s;
+  -webkit-appearance: none;
+}
+
+
+.hamburger:hover {
+  opacity: 0.7; 
+}
+
+.hamburger-box {
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+  position: relative; 
+}
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px; 
+}
+
+.hamburger-inner, 
+.hamburger-inner::before, 
+.hamburger-inner::after {
+  width: 30px;
+  height: 2px;
+  background-color: #00244C;
+  border-radius: 4px;
+  position: absolute;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease; 
+}
+
+#masthead.is-active .hamburger-inner, 
+#masthead.is-active .hamburger-inner::before, 
+#masthead.is-active .hamburger-inner::after {
+    background-color: #00244C;
+}
+
+.hamburger-inner::before, 
+.hamburger-inner::after {
+  content: "";
+  display: block; 
+}
+
+.hamburger-inner::before {
+  top: -6px; 
+}
+
+.hamburger-inner::after {
+  bottom: -6px; 
+}
+
+/*
+ * Boring
+ */
+.hamburger--boring .hamburger-inner, 
+.hamburger--boring .hamburger-inner::before, 
+.hamburger--boring .hamburger-inner::after {
+  transition-property: none; 
+}
+
+.hamburger--boring.is-active .hamburger-inner {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg); 
+}
+
+.hamburger--boring.is-active .hamburger-inner::before {
+  top: 0;
+  opacity: 0; 
+}
+
+.hamburger--boring.is-active .hamburger-inner::after {
+  bottom: 0;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg); 
+}
+
+.hamburger-label {
+  color: #00244C;
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  margin-left: 0.3125em;
+  text-transform: uppercase;
+}
+
+#masthead.is-active .hamburger-label {
+  color: #00244C;
+}
+
+.hamburger-box,
+.hamburger-label {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#site-nav {
+  clear: both;
+  display: flex;
+  flex-direction: column; 
+  height: 0;
+  overflow: hidden;
+  padding-top: 2.5em;
+}
+
+#site-nav.is-active {
+  height: auto;
+  overflow: visible;
+}
+
+#site-nav .col { 
+  padding-bottom: 2.5em;
+} 
+
+@media screen and (min-width: 550px) {
+  #site-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  #site-nav .col {
+    flex: 0 0 50%;
+  } 
+}
+
+@media screen and (min-width: 768px) {
+  #site-nav .col {
+    flex: 0 0 33.333333333%;
+  } 
+}
+
+@media screen and (min-width: 960px) {
+  #site-nav {
+    flex-wrap: nowrap;
+  }
+  
+  #site-nav .col {
+    flex: 0 0 20%;
+  } 
+   
+}
+
+#site-nav h4 {
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+#site-nav ul {
+  list-style-type: none;
+  margin-top: 1em;
+}
+
+#site-nav li {
+  margin-bottom: 0.3125em;
+}
+
+#site-nav li a {
+  color: #b4b9ba;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#site-nav li a:hover,
+#site-nav li a:focus {
+  color: #686d6e;
+}
+
+#site-nav .social {
+  margin: 0;
+  overflow: hidden;
+}
+
+#site-nav .social li {
+  float: left;
+  margin: 0 0.3125em;
+  width: 32px;
+  height: 32px;
+}
+
+#site-nav .social li svg {
+  display: block;
+  fill: #b4b9ba;
+  width: 100%;
+  height: 100%;
+  transition: fill 0.3s ease;
+}
+
+#site-nav .social li:hover svg {
+  fill: #686d6e;
+}
+
+#masthead-search {
+  float: right;
+  margin-top: 0.625em;
+  width: 100%;
+  max-width: 14em;
+  position: relative;
+  -webkit-appearance: none;
+}
+
+#masthead-search input {
+  background: transparent;
+  border: none;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 50px;
+  outline: none;
+  width: 100%;
+  padding: 0.75em 1.125em;
+  transition: border-color 0.3s ease;
+  -webkit-appearance: none;
+}
+
+#masthead-search button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1em;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  right: 0.75em;
+  transform: translateY(-50%);
+  -webkit-appearance: none;
+}
+
+#masthead.is-active #masthead-search button {
+  color: #b4b9ba;
+}
+
+#masthead.is-active #masthead-search input {
+  border-color: #b4b9ba;
+}
+
+#masthead-search ::-webkit-input-placeholder {
+    color:    #fff;
+}
+
+#masthead-search :-moz-placeholder {
+   color:    #fff;
+   opacity:  1;
+}
+
+#masthead-search ::-moz-placeholder {
+   color:    #fff;
+   opacity:  1;
+}
+
+#masthead-search :-ms-input-placeholder {
+   color:    #fff;
+}
+
+#masthead.is-active #masthead-search ::-webkit-input-placeholder {
+    color:    #b4b9ba;
+}
+
+#masthead.is-active #masthead-search :-moz-placeholder {
+   color:    #b4b9ba;
+   opacity:  1;
+}
+
+#masthead.is-active #masthead-search ::-moz-placeholder {
+   color:    #b4b9ba;
+   opacity:  1;
+}
+
+#masthead.is-active #masthead-search :-ms-input-placeholder {
+   color: #b4b9ba
+}
+
+#masthead .col {
+  opacity: 0;
+}
+
+#masthead.is-active .col {
+  transform: translateY(40px);
+  transition: opacity 0.3s ease;
+  animation: fade-in-stagger 0.8s ease forwards;
+}
+
+#masthead.is-active .col:nth-child(1) {
+    -webkit-animation-delay: 0;
+}
+
+#masthead.is-active .col:nth-child(2) {
+    -webkit-animation-delay: 0.1s;
+}
+
+#masthead.is-active .col:nth-child(3) {
+    -webkit-animation-delay: 0.2s;
+}
+
+#masthead.is-active .col:nth-child(4) {
+    -webkit-animation-delay: 0.3s;
+}
+
+#masthead.is-active .col:nth-child(5) {
+    -webkit-animation-delay: 0.4s;
+}
+
+@keyframes fade-in-stagger {
+  to {
+    opacity: 1;
+    transform: translateY(0); 
+  }
+}
+
+html {
+  background: #fff;
+  color: white;
+}
+
+footer .main-gradient {
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.main-gradient {
+  background: -moz-linear-gradient(top, #003366 0%, #fff 100%); /* FF3.6+ */
+  background: linear-gradient(to bottom, #003366 0%,#fff 100%); /* W3C */
+}
+
+/* sticky footer from css-tricks.com */
+* { margin:0; padding:0; } 
+
+html, body, #wrap { height: 100%; }
+
+body > #wrap {height: auto; min-height: 100%;}
+
+#main { padding-bottom: 150px; }  /* must be same height as the footer */
+
+footer { 
+        position: relative;
+	 /* negative value of footer height */
+	height: 50px;
+	clear:both;
+ background: #fff;
+ margin-bottom: 0;
+ 
+} 
+
+
+
+/* CLEAR FIX*/
+.clearfix:after {content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;}
+.clearfix {display: inline-block;}
+/* Hides from IE-mac \*/
+* html .clearfix { height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+.modall {
     display: none;
     /* Hidden by default */
     position: absolute;
@@ -178,9 +616,4 @@ footer{
     color: #000;
     text-decoration: none;
     cursor: pointer;
-}
-
-button{
-    padding: 0;
-    border: 0;
 }
