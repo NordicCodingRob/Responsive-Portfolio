@@ -1,52 +1,73 @@
 // GOOGLE AUTH
-
-  // Initialize Firebase
+var username = "";
+var loggedin = false;
+// Initialize Firebase
 var config = {
-apiKey: "AIzaSyCMYryrvvx8YYsuZXFbopqiWs-Ipe3BOIQ",
-authDomain: "gamesite-f3ba7.firebaseapp.com",
-databaseURL: "https://gamesite-f3ba7.firebaseio.com",
-projectId: "gamesite-f3ba7",
-storageBucket: "gamesite-f3ba7.appspot.com",
-messagingSenderId: "67111225887"
+    apiKey: "AIzaSyCMYryrvvx8YYsuZXFbopqiWs-Ipe3BOIQ",
+    authDomain: "gamesite-f3ba7.firebaseapp.com",
+    databaseURL: "https://gamesite-f3ba7.firebaseio.com",
+    projectId: "gamesite-f3ba7",
+    storageBucket: "gamesite-f3ba7.appspot.com",
+    messagingSenderId: "67111225887"
 };
 firebase.initializeApp(config);
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
 provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-firebase.auth().languageCode = 'pt';
+firebase.auth().useDeviceLanguage();
 
-provider.setCustomParameters({
-    'login_hint': 'youremail@gmail.com'
-});
-firebase.auth().signInWithPopup(provider).then(function (result) {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = result.credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-}).catch(function (error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // Provides a notice of error with credentials/verification
-});
-
-firebase.auth().signOut().then(function() {
+firebase.auth().signOut().then(function () {
     // Sign-out successful.
-  }).catch(function(error) {
+    username = "";
+    loggedin = false;
+}).catch(function (error) {
     // An error happened.
-  });
+});
+
+var uiConfig = {
+    callbacks: {
+      uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+      },
+        signInSuccess: function (currentUser, credential, redirectUrl) {
+            username = currentUser.displayName;
+            loggedin = true;
+            modal.style.display = "none";
+            removeElement("parent");
+            return false;
+        }
+    },
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    signInFlow: 'popup',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
+    // Terms of service url.
+    tosUrl: '<your-tos-url>'
+  };
+
+$("#signin").click(function(){
+    modal.style.display = "flex";
+    parentElement.innerHTML = 
+    '<div id="firebaseui-auth-container"></div>\
+    <div id="loader">Loading...</div>'
+    ui.start('#firebaseui-auth-container', uiConfig);
+
+})
+
+
+
 
 //MODAL AND THE GAMES CODE
 
-var highscore; 
-var game; 
+var highscore;
+var game;
 
 function removeElement(elementId) {
     // Removes an element from the document
@@ -82,32 +103,45 @@ $(".myBtn").click(function () {
     else if (btn.val() == 4) {
         createPong();
     }
-    console.log(CurrentGame)
 
 })
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
-    modal.style.display = "none";
-    highscore = getGameHighScore();
-    console.log(CurrentGame)
-    UploadAndCheck(CurrentGame, highscore);
-    removeElement("parent")
-    
+    if (CurrentGame != ""){
+        modal.style.display = "none";
+        highscore = getGameHighScore();
+        console.log(CurrentGame);
+        UploadAndCheck(CurrentGame, highscore, username);
+        removeElement("parent");
+        CurrentGame= "";
+    }
+    else {
+        modal.style.display = "none";
+        removeElement("parent");
+    }
 
 
-    
+
+
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
-        modal.style.display = "none";;
-        highscore = getGameHighScore();
-        console.log(highscore)
-        UploadAndCheck(CurrentGame, highscore);
-        removeElement("parent");
-        
+        if (CurrentGame != ""){
+            modal.style.display = "none";
+            highscore = getGameHighScore();
+            console.log(highscore)
+            UploadAndCheck(CurrentGame, highscore, username);
+            removeElement("parent");
+            CurrentGame= "";
+        }
+        else {
+            modal.style.display = "none";
+            removeElement("parent");
+        }
+
 
     }
 }
@@ -164,7 +198,7 @@ var createMemory = function () {
 var createPong = function () {
 
     parentElement.innerHTML =
-    '<div id="pong"></div>\
+        '<div id="pong"></div>\
 	<div class="panel">\
 		Move with [ UP ], [ DOWN ]\
 	</div>'
@@ -173,26 +207,26 @@ var createPong = function () {
 }
 
 
-var getGameHighScore = function() {
-   
-        return game.getHighScore();
-    
+var getGameHighScore = function () {
+
+    return game.getHighScore();
+
 }
 
-var UploadAndCheck = function(CurrentGame, highscore) {
-    var  newScore = {
+var UploadAndCheck = function (CurrentGame, highscore, player) {
+    var newScore = {
         GameName: CurrentGame,
-        scoreHolder: "me",
+        scoreHolder: player,
         score: highscore
     };
-    $.post("/api/scores", newScore,getScores);
+    $.post("/api/scores", newScore, getScores);
 }
 
 var games = [];
 
 function getScores() {
-    $.get("/api/scores", function(data) {
-      games = data;
-      console.log(games)
+    $.get("/api/scores", function (data) {
+        games = data;
+        
     });
-  }
+}
