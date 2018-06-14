@@ -45,7 +45,7 @@ header li{
 }
 
 header #Brand {
-    float: left;   
+    float: left;
     margin: 0;
 }
 
@@ -60,7 +60,7 @@ header .highlight, header .current a{
 
 header a:hover{
     color: black;
-    font-weight: bold;   
+    font-weight: bold;
 }
 
 .video {
@@ -114,8 +114,8 @@ header a:hover{
     float: left;
     width: 30%;
     padding: 10px;
-    text-align: center; 
-    color: cornflowerblue;         
+    text-align: center;
+    color: cornflowerblue;
 }
 
 footer{

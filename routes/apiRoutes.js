@@ -14,7 +14,7 @@ module.exports = function (app) {
 
     // GET route for getting all of the posts
     app.get("/api/games", function (req, res) {
-        db.Games.findAll().then(function (games) {
+        db.Games.findAll({}).then(function (games) {
             res.json(games);
         });
     });

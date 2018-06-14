@@ -55,7 +55,7 @@ $(".myBtn").click(function () {
         createMemory();
     }
     else if (btn.val() == 4) {
-        createPong();
+        createRPG();
     }
 
 
@@ -124,12 +124,61 @@ var createMemory = function () {
     runMemory();
 }
 
-var createPong = function () {
-
+var createRPG = function () {
     parentElement.innerHTML =
-        '<canvas id="gameCanvas" width="600" height="400"></canvas>'
-    console.log("test123")
-    runPong();
+        '<nav>\
+            <article id="demo"></article>\
+        </nav>\
+        <div class="gameContainer2">\
+        <section id = "game-start-screen">\
+    <article class="logo"></article>\
+    <article class="start-menu">\
+                    <br>\
+                        <button id="start-game" class="main-menu">Start Game</button>\
+                        <br>\
+                            <button onclick="getLocation()" class="main-menu">Set Location</button>\
+                            <br>\
+                                <button type="button" onclick="difficulty()" class="main-menu">Submit\
+					<br> Difficulty</button>\
+                                    <br>\
+                                        <p>Select your difficulty\
+					<br> 1 - 10</p>\
+                                            <input id="number">\
+                                                <br>\
+                                                    <p id="test"></p>\
+            </article>\
+            </section>\
+            <section id="character-select-screen">\
+                                                <p class="select-button-contain">\
+                                                    <button id="char-select">Fight!</button>\
+                                                </p>\
+                                                <article id="team-character-select"></article>\
+                                                <article id="selected-characters">\
+                                                    <p>Selected Fighters</p>\
+                                                </article>\
+                                                <article>\
+                                                    <p class="description-menu">Choose up to two characters and rush into battle.</p>\
+                                                </article>\
+                                            </section>\
+                                            <section id="combat-arena">\
+                                                <article id="game-message"></article>\
+                                                <button onclick="reload()" class="reset">Try Again</button>\
+                                                <article id="player-section"></article>\
+                                                <articl id="enemy-section">\
+                                                </article>\
+                                                <article id="combat-menu">\
+                                                    <div class="moveset-container"></div>\
+                                                    <div class="enemy-menu"></div>\
+                                                    <div class="character-menu">\
+      <!--<button id="end-match">End Match</button>  Will be replaced, keeping for possible test use-->\
+			</article>\
+            </div>\
+            </section>\
+                    </div>'
 
-}
+    rpgCreate();
+
+};
+
+
 
