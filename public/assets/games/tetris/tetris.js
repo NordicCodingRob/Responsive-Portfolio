@@ -1,8 +1,9 @@
 
-function tetrisCreate() {
+function TetrisJS(){
     //-------------------------------------------------------------------------
     // base helper methods
     //-------------------------------------------------------------------------
+    
 
     function get(id) { return document.getElementById(id); }
     function hide(id) { get(id).style.visibility = 'hidden'; }
@@ -53,7 +54,8 @@ function tetrisCreate() {
         score,         // the current score
         vscore,        // the currently displayed score (it catches up to score in small chunks - like a spinning slot machine)
         rows,          // number of completed rows in the current game
-        step;          // how long before current piece drops by 1 row
+        step,         // how long before current piece drops by 1 row
+        highScore = 0;
 
     //-------------------------------------------------------------------------
     // tetris pieces
@@ -78,6 +80,11 @@ function tetrisCreate() {
     var s = { size: 3, blocks: [0x06C0, 0x8C40, 0x6C00, 0x4620], color: 'green' };
     var t = { size: 3, blocks: [0x0E40, 0x4C40, 0x4E00, 0x4640], color: 'purple' };
     var z = { size: 3, blocks: [0x0C60, 0x4C80, 0xC600, 0x2640], color: 'red' };
+
+    this.getHighScore = function(){
+        console.log(highScore)
+        return highScore;
+    };
 
     //------------------------------------------------
     // do the bit manipulation and iterate through each
@@ -195,7 +202,7 @@ function tetrisCreate() {
     //-------------------------------------------------------------------------
 
     function play() { hide('start'); reset(); playing = true; }
-    function lose() { show('start'); setVisualScore(); playing = false; }
+    function lose() { show('start'); setVisualScore(); playing = false; highScore = Math.max(score, highScore); console.log(highScore, score);}
 
     function setVisualScore(n) { vscore = n || score; invalidateScore(); }
     function setScore(n) { score = n; setVisualScore(n); }

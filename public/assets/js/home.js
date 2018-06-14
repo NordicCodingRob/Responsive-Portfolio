@@ -26,6 +26,8 @@
 //     // Provides a notice of error with credentials/verification
 // });
 
+var highscore; 
+var game; 
 
 function removeElement(elementId) {
     // Removes an element from the document
@@ -40,6 +42,7 @@ var parentElement = document.getElementById("parent");
 
 // Get the button that opens the modal
 var btn = ""
+var CurrentGame = ""
 
 
 $(".myBtn").click(function () {
@@ -47,31 +50,46 @@ $(".myBtn").click(function () {
     btn = $(this);
     if (btn.val() == 1) {
         createSnake();
+        CurrentGame = "Snake"
     }
     else if (btn.val() == 2) {
         createT();
+        CurrentGame = "Tetris"
     }
     else if (btn.val() == 3) {
         createMemory();
+        CurrentGame = "Memory"
     }
     else if (btn.val() == 4) {
         createPong();
     }
-
+    console.log(CurrentGame)
 
 })
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
+    highscore = getGameHighScore();
+    console.log(CurrentGame)
+    UploadAndCheck(CurrentGame, highscore);
     removeElement("parent")
+    
+
+
+    
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
-        modal.style.display = "none";
-        removeElement("parent")
+        modal.style.display = "none";;
+        highscore = getGameHighScore();
+        console.log(highscore)
+        UploadAndCheck(CurrentGame, highscore);
+        removeElement("parent");
+        
+
     }
 }
 // If you are using jQuery, use < $(document).ready(function(){ ... }) > instead
@@ -86,8 +104,7 @@ var createSnake = function () {
     };
     // Create the game object. The settings object is NOT required.
     // The parentElement however is required
-    var game = new SnakeJS(parentElement, settings);
-
+    game = new SnakeJS(parentElement, settings);
 };
 
 var createT = function () {
@@ -102,8 +119,9 @@ var createT = function () {
         <canvas id="canvas">\
         </canvas>\
     </div>'
-    tetrisCreate();
+    game = new TetrisJS();
 };
+
 
 var createMemory = function () {
     parentElement.innerHTML =
@@ -127,9 +145,35 @@ var createMemory = function () {
 var createPong = function () {
 
     parentElement.innerHTML =
-        '<canvas id="gameCanvas" width="600" height="400"></canvas>'
-    console.log("test123")
+    '<div id="pong"></div>\
+	<div class="panel">\
+		Move with [ UP ], [ DOWN ]\
+	</div>'
     runPong();
 
 }
 
+
+var getGameHighScore = function() {
+   
+        return game.getHighScore();
+    
+}
+
+var UploadAndCheck = function(CurrentGame, highscore) {
+    var  newScore = {
+        GameName: CurrentGame,
+        scoreHolder: "me",
+        score: highscore
+    };
+    $.post("/api/scores", newScore,getScores);
+}
+
+var games = [];
+
+function getScores() {
+    $.get("/api/scores", function(data) {
+      games = data;
+      console.log(games)
+    });
+  }

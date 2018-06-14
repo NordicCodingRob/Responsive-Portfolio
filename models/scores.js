@@ -1,7 +1,7 @@
 module.exports = function (sequelize, DataTypes) {
   var Scores = sequelize.define("Scores", {
     // required
-    gameId: DataTypes.INTEGER,
+    GameName: DataTypes.STRING,
     scoreHolder: DataTypes.STRING,
     score: DataTypes.INTEGER
   });
