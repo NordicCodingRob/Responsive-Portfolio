@@ -115,6 +115,11 @@ $(".myBtn").click(function () {
         CurrentGame = "Whack-a-mole"
     }
 
+    else if (btn.val() == 5) {
+        createFlappy();
+        CurrentGame = "flappy-bird"
+    }
+
 })
 
 // When the user clicks on <span> (x), close the modal
@@ -234,11 +239,18 @@ var createWhack = function () {
         </div>\
         </div>'
     Whack();
-
-
-
-
 };
+
+var createFlappy = function () {
+
+    parentElement.innerHTML =
+
+        '<h3>FLORPY BORK!!!</h3>\
+<canvas id="canvas" width="288"\ height="512"></canvas>'
+    flappy();
+};
+
+
 
 
 var getGameHighScore = function () {
