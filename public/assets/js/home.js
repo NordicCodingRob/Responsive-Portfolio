@@ -19,13 +19,7 @@ provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
 firebase.auth().useDeviceLanguage();
 
-firebase.auth().signOut().then(function () {
-    // Sign-out successful.
-    username = "";
-    loggedin = false;
-}).catch(function (error) {
-    // An error happened.
-});
+
 
 var uiConfig = {
     callbacks: {
@@ -39,6 +33,7 @@ var uiConfig = {
             loggedin = true;
             modal.style.display = "none";
             removeElement("parent");
+            $("#signin").html("Log out")
             return false;
         }
     },
@@ -53,11 +48,26 @@ var uiConfig = {
   };
 
 $("#signin").click(function(){
-    modal.style.display = "flex";
-    parentElement.innerHTML = 
-    '<div id="firebaseui-auth-container"></div>\
-    <div id="loader">Loading...</div>'
-    ui.start('#firebaseui-auth-container', uiConfig);
+    if (loggedin == false) {
+        modal.style.display = "flex";
+        parentElement.innerHTML = 
+        '<div id="firebaseui-auth-container"></div>\
+        <div id="loader">Loading...</div>'
+        ui.start('#firebaseui-auth-container', uiConfig);
+    }
+    else if (loggedin == true){
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+            username = "";
+            loggedin = false;
+            $("#signin").html("Log in")
+            modal.style.display = "flex";
+            parentElement.innerHTML = "<p>You've logged out!</p>"
+        }).catch(function (error) {
+            // An error happened.
+        });
+
+    }
 
 })
 
