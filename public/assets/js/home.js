@@ -237,7 +237,6 @@ var createWhack = function () {
         </div>\
         </div>'
     Whack();
-<<<<<<< HEAD
 };
 
 var createFlappy = function () {
@@ -245,10 +244,8 @@ var createFlappy = function () {
     parentElement.innerHTML =
 
         '<h3>FLORPY BORK!!!</h3>\
-<canvas id="canvas" width="288"\ height="512"></canvas>'
+        <canvas id="canvas" width="288"\ height="512"></canvas>'
     flappy();
-=======
->>>>>>> 2bb66315934bbe04cca4dcbdcde58198e3ca527b
 };
 
 
