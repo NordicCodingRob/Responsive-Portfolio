@@ -113,7 +113,7 @@ $(".myBtn").click(function () {
         createWhack();
         CurrentGame = "Whack-a-mole"
     }
-    
+
 
     else if (btn.val() == 5) {
         createFlappy();
@@ -237,7 +237,7 @@ var createWhack = function () {
         </div>\
         </div>'
     Whack();
-<<<<<<< HEAD
+
 };
 
 var createFlappy = function () {
@@ -247,8 +247,7 @@ var createFlappy = function () {
         '<h3>FLORPY BORK!!!</h3>\
 <canvas id="canvas" width="288"\ height="512"></canvas>'
     flappy();
-=======
->>>>>>> 2bb66315934bbe04cca4dcbdcde58198e3ca527b
+
 };
 
 
@@ -263,7 +262,7 @@ var getGameHighScore = function () {
 var gameScores = [];
 
 var UploadAndCheck = function (CurrentGame, highscore, player) {
-    found = false; 
+    found = false;
     getScores();
     var newScore = {
         GameName: CurrentGame,
@@ -271,50 +270,50 @@ var UploadAndCheck = function (CurrentGame, highscore, player) {
         score: highscore
     };
     console.log(newScore.GameName)
-    setTimeout(function(){
-        
-        for (var i = 0; i < gameScores.length; i++){
-            if (CurrentGame === gameScores[i].GameName){
+    setTimeout(function () {
+
+        for (var i = 0; i < gameScores.length; i++) {
+            if (CurrentGame === gameScores[i].GameName) {
                 found = true;
-                console.log("highscore: " + gameScores[i].score +" VS currentScore: " + highscore)
-                if (highscore > gameScores[i].score){
+                console.log("highscore: " + gameScores[i].score + " VS currentScore: " + highscore)
+                if (highscore > gameScores[i].score) {
                     console.log(newScore);
                     updateScore(newScore);
-                    console.log("updated") 
+                    console.log("updated")
                     return true;
                 }
-                else{
+                else {
                     console.log("breaking")
                     break;
-                } 
+                }
             }
         }
-        if (found == false){
+        if (found == false) {
             console.log("posting")
             $.post("/api/scores", newScore, getScores);
         }
-        
-        
+
+
     }, 500);
-    
+
 }
 
 
-var getScores = function() {
+var getScores = function () {
     $.get("/api/scores", function (data) {
         gameScores = data;
         return data;
     });
 }
 
-var updateScore = function(newScore) {
+var updateScore = function (newScore) {
     console.log(newScore.gameName)
     $.ajax({
-      method: "PUT",
-      url: "/api/scores",
-      data: newScore,
-      where: {
-        gameName: newScore.GameName
-      }
+        method: "PUT",
+        url: "/api/scores",
+        data: newScore,
+        where: {
+            gameName: newScore.GameName
+        }
     }).then(getScores());
-  }
+}
