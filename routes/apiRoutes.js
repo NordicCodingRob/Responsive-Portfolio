@@ -51,15 +51,18 @@ module.exports = function (app) {
     });
 
     app.put("/api/scores", function (req, res) {
-        db.Scores.update(
-            req.body,
-            {
-                where: {
-                    id: req.body.id
-                }
-            }).then(function (scores) {
-                res.json(scores)
-            });
+        db.Scores.update({
+            gameName: req.body.GameName,
+            score: req.body.score,
+            scoreHolder: req.body.scoreHolder
+        }, {
+        where: {
+            gameName: req.body.GameName
+        }
+        }).then(function (scores) {
+            console.log("hello?")
+            res.json(scores)
+        });
     });
 
 };
