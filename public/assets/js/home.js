@@ -1,6 +1,7 @@
 // GOOGLE AUTH
 var username = "Anon";
 var loggedin = false;
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCMYryrvvx8YYsuZXFbopqiWs-Ipe3BOIQ",
@@ -23,11 +24,11 @@ firebase.auth().useDeviceLanguage();
 
 var uiConfig = {
     callbacks: {
-      uiShown: function() {
-        // The widget is rendered.
-        // Hide the loader.
-        document.getElementById('loader').style.display = 'none';
-      },
+        uiShown: function () {
+            // The widget is rendered.
+            // Hide the loader.
+            document.getElementById('loader').style.display = 'none';
+        },
         signInSuccess: function (currentUser, credential, redirectUrl) {
             username = currentUser.displayName;
             loggedin = true;
@@ -40,22 +41,22 @@ var uiConfig = {
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
     signInOptions: [
-      // Leave the lines as is for the providers you want to offer your users.
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        // Leave the lines as is for the providers you want to offer your users.
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
     // Terms of service url.
     tosUrl: '<your-tos-url>'
-  };
+};
 
-$("#signin").click(function(){
+$("#signin").click(function () {
     if (loggedin == false) {
         modal.style.display = "flex";
-        parentElement.innerHTML = 
-        '<div id="firebaseui-auth-container"></div>\
+        parentElement.innerHTML =
+            '<div id="firebaseui-auth-container"></div>\
         <div id="loader">Loading...</div>'
         ui.start('#firebaseui-auth-container', uiConfig);
     }
-    else if (loggedin == true){
+    else if (loggedin == true) {
         firebase.auth().signOut().then(function () {
             // Sign-out successful.
             username = "Anon";
@@ -70,8 +71,6 @@ $("#signin").click(function(){
     }
 
 })
-
-
 
 
 //MODAL AND THE GAMES CODE
@@ -111,7 +110,8 @@ $(".myBtn").click(function () {
         CurrentGame = "Memory"
     }
     else if (btn.val() == 4) {
-        createPong();
+        createWhack();
+        CurrentGame = "Whack-a-mole"
     }
     
 
@@ -119,32 +119,29 @@ $(".myBtn").click(function () {
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
-    if (CurrentGame != ""){
+    if (CurrentGame != "") {
         modal.style.display = "none";
         highscore = getGameHighScore();
         UploadAndCheck(CurrentGame, highscore, username);
         removeElement("parent");
-        CurrentGame= "";
+        CurrentGame = "";
     }
     else {
         modal.style.display = "none";
         removeElement("parent");
     }
 
-
-
-
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
-        if (CurrentGame != ""){
+        if (CurrentGame != "") {
             modal.style.display = "none";
             highscore = getGameHighScore();
             UploadAndCheck(CurrentGame, highscore, username);
             removeElement("parent");
-            CurrentGame= "";
+            CurrentGame = "";
         }
         else {
             modal.style.display = "none";
@@ -204,16 +201,38 @@ var createMemory = function () {
     runMemory();
 }
 
-var createPong = function () {
+var createWhack = function () {
 
     parentElement.innerHTML =
-        '<div id="pong"></div>\
-	<div class="panel">\
-		Move with [ UP ], [ DOWN ]\
-	</div>'
-    runPong();
 
-}
+        '<div class="gameContainer2">\
+        <h1>Whack-a-mole!\
+        <span class="score">0</span>\
+        </h1>\
+        <button id = "start">Whack It!</button>\
+        <div class="game">\
+            <div class="hole hole1">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole2">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole3">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole4">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole5">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole6">\
+                <div class="mole"></div>\
+            </div>\
+        </div>\
+        </div>'
+    Whack();
+};
 
 
 var getGameHighScore = function () {
