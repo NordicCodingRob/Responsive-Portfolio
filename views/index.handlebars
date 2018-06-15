@@ -4,21 +4,12 @@
 <script src="/assets/games/tetris/stats.js" type="text/javascript"></script>
 <link href="/assets/games/tetris/tetris.css" type="text/css" rel="stylesheet">
 
-
-
-<script src="/assets/games/Whack-A-Mole/whack.js" type="text/javascript"></script>
-<link href="/assets/games/Whack-A-Mole/style.css" type="text/css" rel="stylesheet">
-
-<script src="/assets/games/FlappyBird/flappyBird.js" type="text/javascript"></script>
-
-
 <script src="/assets/games/memorize/memory.js" type="text/javascript"></script>
 
+<script src="/assets/games/pong.js" type="text/javascript"></script>
+
 <link href="/assets/games/memorize/memory.css" type="text/css" rel="stylesheet">
-
-<script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
-
 <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -30,8 +21,6 @@
 <title>EverTech Games</title>
 
 <div class="hero">
-
-
     <header id="masthead" role="banner">
         <div class="logo-image">
             <a href="#">
@@ -63,10 +52,10 @@
                     <h4>About</h4>
                     <ul>
                         <li>
-                            <a href="#">Our Story</a>
+                            <a href="#our-story">Our Story</a>
                         </li>
                         <li>
-                            <a href="#">Our Team</a>
+                            <a href="#our-story">Our Team</a>
                         </li>
                     </ul>
                 </div>
@@ -84,11 +73,12 @@
                 <div class="col">
                     <h4>Account</h4>
                     <ul>
+
                         <li>
-                            <a id="signin" href="#">Log in</a>
+                            <a href="#">Log in</a>
                         </li>
                         <li>
-                            <a href="#">Upload a Game</a>
+                            <a href="#">Submit a Game</a>
                         </li>
                     </ul>
                 </div>
@@ -101,90 +91,89 @@
 
 
 
-<section id="boxes">
-    <div class="container">
-        <div class="row">
-            <div class="box col-md-4">
+<div class="content">
+    <div class="box">
+        <h3 class="ghs main-font">Global High Scores:</h3>
+    </div>
+    <div class="high-scores row">
+        
+            <div class="hs-box col-md-2"><span class="snake-highscore"></span><div class="smalltext">Snake</div></div>
+            <div class="hs-box col-md-2"><span class="tetris-highscore"></span><div class="smalltext">Tetris</div></div>
+            <div class="hs-box col-md-2"><span class="memory-highscore"></span><div class="smalltext">Memory</div></div>
+            <div class="hs-box col-md-2"><span class="pong-highscore"></span><div class="smalltext">Pong</div></div>
+            <div class="hs-box col-md-2"><span class="whack-highscore"></span><div class="smalltext">Whack A Mole</div></div>
+            <div class="hs-box col-md-2"><span class="flappy-highscore"></span><div class="smalltext">Flappy Bird</div></div>
+            
+        
+    </div>
 
-                <button class="myBtn" value="1">
-                    <div id="snake-video">
-                        <video preload="auto" muted loop width="204" height="204" autoplay>
-                            <source src="/assets/media/snake.mp4" type="video/mp4">
-                        </video>
 
-                    </div>
-                </button>
-                <h3>Snake</h3>
-            </div>
 
-            <div class="box col-md-4">
-                <button class="myBtn" value="2">
-                    <div id="tetris-video">
-                        <video preload="auto" muted loop width="204" height="204" autoplay>
-                            <source src="/assets/media/tetris.mp4" type="video/mp4">
+    <div class="row">
+        <div class="box col-md-4">
 
-                        </video>
-                    </div>
-                </button>
-
-                <h3>Tetris</h3>
-
-            </div>
-
-            <div class="box col-md-4">
-                <button class="myBtn" value="3">
+            <button class="myBtn" value="1">
+                <div id="snake-video">
                     <video preload="auto" muted loop width="204" height="204" autoplay>
-                        <source src="/assets/media/memory.mp4" type="video/mp4">
-
+                        <source src="/assets/media/snake.mp4" type="video/mp4">
                     </video>
-            </div>
 
-            <div class="box col-md-4">
-                <button class="myBtn" value="4">
-                    <video preload="auto" muted loop width="204" height="204" autoplay>
-                        <source src="/assets/media/memory.mp4" type="video/mp4">
-
-                    </video>
-            </div>
-
-            <div class="box col-md-4">
-                <button class="myBtn" value="5">
-                    <video preload="auto" muted loop width="204" height="204" autoplay>
-                        <source src="/assets/media/memory.mp4" type="video/mp4">
-
-                    </video>
-            </div>
-
+                </div>
             </button>
-            <h3>Memory</h3>
+            <h3 class="main-font">Snake</h3>
+        </div>
+
+        <div class="box col-md-4">
+            <button class="myBtn" value="2">
+                <div id="tetris-video">
+                    <video preload="auto" muted loop width="204" height="204" autoplay>
+                        <source src="/assets/media/tetris.mp4" type="video/mp4">
+
+                    </video>
+                </div>
+            </button>
+
+            <h3 class="main-font">Tetris</h3>
 
         </div>
 
+        <div class="box col-md-4">
+            <button class="myBtn" value="3">
+                <div id="memory-video">
+                    <video preload="auto" muted loop width="204" height="204" autoplay>
+                        <source src="/assets/media/memory.mp4" type="video/mp4">
 
-
-
-
-
-        <div id="myModal" class="modall">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <div id="parent"></div>
-            </div>
+                    </video>
+                </div>
+            </button>
+            <h3 class="main-font">Memory</h3>
 
         </div>
-
     </div>
+
+
+
+
+
+
+    <div id="myModal" class="modall">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="parent"></div>
+        </div>
     </div>
-</section>
 
 
-<section id="our-story">
-    <div class="container">
-        <div class="box">
 
-            <h3>Our Story</h3>
+
+
+
+    <div class="row box">
+        <div id="our-story" class="col-md-12">
+
+            <h3 class="main-font">Our Story</h3>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe ipsum amet a, nostrum totam autem quis. Nam veritatis
                 numquam fugiat ut labore quam beatae quo inventore, enim asperiores tenetur assumenda id quasi vero iusto,
                 architecto veniam culpa sequi voluptatum sint fugit neque. Deserunt error ratione non nemo nihil! Libero
@@ -193,42 +182,41 @@
                 dolorum dolor! Beatae vitae neque hic quos tenetur, nisi illo voluptates excepturi esse? At cupiditate debitis
                 totam hic nostrum quae itaque? </p>
         </div>
-
     </div>
-    </div>
-</section>
-<section id="our-team">
-    <div class="container">
-        <div class="box">
-            <div class="row">
-                <div class="col-md-3">
 
-                    <img src="http://fromanativeson.com/wp-content/uploads/2015/02/super-bowl-xlix-photo-31.jpg" height=204 width=204>
-                </div>
 
-                <div class="col-md-9">
-                    <h3>Our Team</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe ipsum amet a, nostrum totam autem quis.
-                        Nam veritatis numquam fugiat ut labore quam beatae quo inventore, enim asperiores tenetur assumenda
-                        id quasi vero iusto, architecto veniam culpa sequi voluptatum sint fugit neque. Deserunt error ratione
-                        non nemo nihil! Libero repellat repudiandae perferendis! Eveniet consequuntur quos dolor, eius at
-                        itaque maxime odit nesciunt expedita unde mollitia minima hic, id perferendis possimus, a dolorem?
-                        Veritatis, voluptate assumenda et ab a quibusdam dolorum dolor! Beatae vitae neque hic quos tenetur,
-                        nisi illo voluptates excepturi esse? At cupiditate debitis totam hic nostrum quae itaque? </p>
-                </div>
-            </div>
 
+
+
+
+    <div class="row box">
+        <div class="col-md-3">
+
+            <img src="http://fromanativeson.com/wp-content/uploads/2015/02/super-bowl-xlix-photo-31.jpg" height=204 width=204>
+        </div>
+
+        <div class="col-md-9">
+            <h3 class="main-font">Our Team</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe ipsum amet a, nostrum totam autem quis. Nam veritatis
+                numquam fugiat ut labore quam beatae quo inventore, enim asperiores tenetur assumenda id quasi vero iusto,
+                architecto veniam culpa sequi voluptatum sint fugit neque. Deserunt error ratione non nemo nihil! Libero
+                repellat repudiandae perferendis! Eveniet consequuntur quos dolor, eius at itaque maxime odit nesciunt expedita
+                unde mollitia minima hic, id perferendis possimus, a dolorem? Veritatis, voluptate assumenda et ab a quibusdam
+                dolorum dolor! Beatae vitae neque hic quos tenetur, nisi illo voluptates excepturi esse? At cupiditate debitis
+                totam hic nostrum quae itaque? </p>
         </div>
     </div>
-    </div>
 
-    </div>
 
-</section>
+
+
+
+
+</div>
 <footer>
 
     <div class="main-gradient">
-        <p>everTech.io &trade; 2018</p>
+        <p>everTech.io&trade; 2018</p>
     </div>
 
 </footer>
@@ -303,6 +291,7 @@
     canvas.addEventListener('mouseup', () => isDrawing = false);
     canvas.addEventListener('mouseout', () => isDrawing = false);
 </script>
+
 
 
 <script src="/assets/js/home.js" type="text/javascript"></script>
