@@ -73,6 +73,8 @@ $("#signin").click(function () {
 })
 
 
+
+
 //MODAL AND THE GAMES CODE
 
 var highscore;
