@@ -5,158 +5,294 @@
 <link href="/assets/games/tetris/tetris.css" type="text/css" rel="stylesheet">
 
 
-<script src="/assets/games/RPG/assets/javascript/rpg.js" type="text/javascript"></script>
-<link href="/assets/games/RPG/assets/css/reset.css" type="text/css" rel="stylesheet">
-<link href="/assets/games/RPG/assets/css/style.css" type="text/css" rel="stylesheet">
+
+<script src="/assets/games/Whack-A-Mole/whack.js" type="text/javascript"></script>
+<link href="/assets/games/Whack-A-Mole/style.css" type="text/css" rel="stylesheet">
 
 
 <script src="/assets/games/memorize/memory.js" type="text/javascript"></script>
+
 
 <link href="/assets/games/memorize/memory.css" type="text/css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
+<canvas class="canvas-bg" id="draw" width="800" height="800"></canvas>
+<title>EverTech Games</title>
 
-<header>
-    <div class="container">
-        <div id="Brand">
-            <h1>ever
-                <span class="highlight">Tech</span> Games</h1>
+<div class="hero">
+    <header id="masthead" role="banner">
+        <div class="logo-image">
+            <a href="#">
+                <img id="logo" src="/assets/media/evertech.png" alt="EverTech Games">
+            </a>
         </div>
-        <nav>
-            <ul>
-                <li class="current">
-                    <a href="basicstuff.html">Home</a>
-                </li>
-                <li class="current">
-                    <a href="index.html">Contact</a>
-                </li>
-                <li class="current">
-                    <a href="work.html">Inquiries</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
+
+        <div class="container">
 
 
-<section id="Showcase">
-    <div class="container1">
-        <h1>If you have to ask, you can't afford it.</h1>
-        <p>This lorem ipsum generator is made for all the webdesigners</p>
-    </div>
-</section>
+            <button class="hamburger hamburger--boring" type="button">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+                <span class="hamburger-label">Menu</span>
+            </button>
+            <nav id="site-nav" role="navigation">
 
-<section id="Newsletter">
-    <div class="container2">
-        <h1>Subscribe To Newsletter</h1>
-        <form>
-            <input type="email" placeholder="Hint: Email Here">
-            <button type="Submit" class="button1">Submit</button>
-        </form>
-    </div>
-</section>
+                <div class="col">
+                    <h4>Home</h4>
+                    <ul>
+                        <li>
+                            <a href="#">EverTech Games</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>About</h4>
+                    <ul>
+                        <li>
+                            <a href="#">Our Story</a>
+                        </li>
+                        <li>
+                            <a href="#">Our Team</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>
+                            <a href="#">News</a>
+                        </li>
+                        <li>
+                            <a href="#">Join Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4>Account</h4>
+                    <ul>
+                        <li>
+                            <a href="#">Sign up</a>
+                        </li>
+                        <li>
+                            <a href="#">Log in</a>
+                        </li>
+                        <li>
+                            <a href="#">Upload a Game</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+</div>
+
+
+
+
 
 <section id="boxes">
     <div class="container">
-        <div class="box">
+        <div class="row">
+            <div class="box col-md-4">
 
-            <button class="myBtn" value="1">
-                <div id="snake-video">
-                    <HTML Embed>
-                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" width="204" height="204">
-                        <source src="/assets/media/snake.mp4" type="video/mp4"> Your browser does not support the video tag.
-                    </video>
+                <button class="myBtn" value="1">
+                    <div id="snake-video">
+                        <video preload="auto" muted loop width="204" height="204" autoplay>
+                            <source src="/assets/media/snake.mp4" type="video/mp4">
+                        </video>
 
-                    </HTML>
-
-                </div>
-            </button>
-            <h3>Gallery</h3>
-            <p>This lorem ipsum generator is made for all the webdesigners</p>
-        </div>
-        <div class="box">
-
-            <button class="myBtn" value="2">
-                <div id="tetris-video">
-                    <HTML Embed>
-                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" width="204" height="204">
-                        <source src="/assets/media/tetris.mp4" type="video/mp4"> Your browser does not support the video tag.
-                    </video>
-
-                    </HTML>
-
-                </div>
-
-            </button>
-            <h3>Blog</h3>
-            <p>This lorem ipsum generator is made for all the webdesigners</p>
-        </div>
-
-        <div class="box">
-
-            <button class="myBtn" value="3">
-                <div id="memory-video">
-                    <HTML Embed>
-                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" width="204" height="204">
-                        <source src="/assets/media/memory.mp4" type="video/mp4"> Your browser does not support the video tag.
-                    </video>
-
-                    </HTML>
-
-                </div>
-
-            </button>
-
-            <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div id="parent"></div>
-                </div>
-
+                    </div>
+                </button>
+                <h3>Snake</h3>
             </div>
-            <h3>Sports</h3>
-            <p>This lorem ipsum generator is made for all the webdesigners</p>
-        </div>
 
-        <div class="box">
+            <div class="box col-md-4">
+                <button class="myBtn" value="2">
+                    <div id="tetris-video">
+                        <video preload="auto" muted loop width="204" height="204" autoplay>
+                            <source src="/assets/media/tetris.mp4" type="video/mp4">
 
-            <button class="myBtn" value="4">
-                <div id="memory-video">
-                    <HTML Embed>
-                    <video class="video" onmouseover="this.play()" onmouseout="this.pause();this.currentTime=0;" width="204" height="204">
-                        <source src="/assets/media/memory.mp4" type="video/mp4"> Your browser does not support the video tag.
-                    </video>
+                        </video>
+                    </div>
+                </button>
 
-                    </HTML>
-
-                </div>
-
-            </button>
-
-            <div id="myModal" class="modal">
-
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <div id="parent"></div>
-                </div>
+                <h3>Tetris</h3>
 
             </div>
 
-            <h3>Sports</h3>
-            <p>This lorem ipsum generator is made for all the webdesigners</p>
+            <div class="box col-md-4">
+                <button class="myBtn" value="3">
+                    <video preload="auto" muted loop width="204" height="204" autoplay>
+                        <source src="/assets/media/memory.mp4" type="video/mp4">
+
+                    </video>
+            </div>
+
+            <div class="box col-md-4">
+                <button class="myBtn" value="4">
+                    <video preload="auto" muted loop width="204" height="204" autoplay>
+                        <source src="/assets/media/memory.mp4" type="video/mp4">
+
+                    </video>
+            </div>
+
+            </button>
+            <h3>Memory</h3>
+
         </div>
 
+
+
+
+
+
+        <div id="myModal" class="modall">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="parent"></div>
+            </div>
+
+        </div>
 
     </div>
+    </div>
+</section>
+
+
+<section id="our-story">
+    <div class="container">
+        <div class="box">
+
+            <h3>Our Story</h3>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe ipsum amet a, nostrum totam autem quis. Nam veritatis
+                numquam fugiat ut labore quam beatae quo inventore, enim asperiores tenetur assumenda id quasi vero iusto,
+                architecto veniam culpa sequi voluptatum sint fugit neque. Deserunt error ratione non nemo nihil! Libero
+                repellat repudiandae perferendis! Eveniet consequuntur quos dolor, eius at itaque maxime odit nesciunt expedita
+                unde mollitia minima hic, id perferendis possimus, a dolorem? Veritatis, voluptate assumenda et ab a quibusdam
+                dolorum dolor! Beatae vitae neque hic quos tenetur, nisi illo voluptates excepturi esse? At cupiditate debitis
+                totam hic nostrum quae itaque? </p>
+        </div>
+
+    </div>
+    </div>
+</section>
+<section id="our-team">
+    <div class="container">
+        <div class="box">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <img src="http://fromanativeson.com/wp-content/uploads/2015/02/super-bowl-xlix-photo-31.jpg" height=204 width=204>
+                </div>
+
+                <div class="col-md-9">
+                    <h3>Our Team</h3>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe ipsum amet a, nostrum totam autem quis.
+                        Nam veritatis numquam fugiat ut labore quam beatae quo inventore, enim asperiores tenetur assumenda
+                        id quasi vero iusto, architecto veniam culpa sequi voluptatum sint fugit neque. Deserunt error ratione
+                        non nemo nihil! Libero repellat repudiandae perferendis! Eveniet consequuntur quos dolor, eius at
+                        itaque maxime odit nesciunt expedita unde mollitia minima hic, id perferendis possimus, a dolorem?
+                        Veritatis, voluptate assumenda et ab a quibusdam dolorum dolor! Beatae vitae neque hic quos tenetur,
+                        nisi illo voluptates excepturi esse? At cupiditate debitis totam hic nostrum quae itaque? </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    </div>
+
 </section>
 <footer>
-    <p>everTech.io &trade; 2018</p>
+
+    <div class="main-gradient">
+        <p>everTech.io &trade; 2018</p>
+    </div>
+
 </footer>
+
+
+
+
+
+<script>
+    $(function () {
+
+        $('body').addClass('js');
+
+        var $hamburger = $('.hamburger'),
+            $nav = $('#site-nav'),
+            $masthead = $('#masthead');
+
+        $hamburger.click(function () {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false;
+        })
+    });
+
+
+</script>
+<script>
+    const canvas = document.querySelector('#draw');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx.strokeStyle = '#BADA55';
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 100;
+    // ctx.globalCompositeOperation = 'multiply';
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let hue = 0;
+    let direction = true;
+    function draw(e) {
+        // stop the fn from running when they are not moused down
+        console.log(e);
+        ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+        ctx.beginPath();
+        // start from
+        ctx.moveTo(lastX, lastY);
+        // go to
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+        hue++;
+        if (hue >= 360) {
+            hue = 0;
+        }
+        if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+            direction = !direction;
+        }
+        if (direction) {
+            ctx.lineWidth++;
+        } else {
+            ctx.lineWidth--;
+        }
+    }
+    canvas.addEventListener('mousedown', (e) => {
+        isDrawing = true;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', () => isDrawing = false);
+    canvas.addEventListener('mouseout', () => isDrawing = false);
+</script>
+
 
 <script src="/assets/js/home.js" type="text/javascript"></script>
 <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>

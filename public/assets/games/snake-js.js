@@ -160,6 +160,7 @@ function SnakeJS(parentElement, config){
 			};
 
 			setTimeout(removeTail, config.frameInterval * 10);
+			return;
 		};
 
 		var startMoving = function(){
@@ -171,6 +172,7 @@ function SnakeJS(parentElement, config){
 
 		// Calculates what the next frame will be like and draws it.
 		var nextFrame = function(){
+			
 
 			// If the snake can't be moved in the desired direction due to collision
 			if (!moveSnake(inputInterface.lastDirection())) {

@@ -1,31 +1,52 @@
-// Google Authentication for the user-login
+// GOOGLE AUTH
 
-// var provider = new firebase.auth.GoogleAuthProvider();
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCMYryrvvx8YYsuZXFbopqiWs-Ipe3BOIQ",
+    authDomain: "gamesite-f3ba7.firebaseapp.com",
+    databaseURL: "https://gamesite-f3ba7.firebaseio.com",
+    projectId: "gamesite-f3ba7",
+    storageBucket: "gamesite-f3ba7.appspot.com",
+    messagingSenderId: "67111225887"
+};
+firebase.initializeApp(config);
 
-// provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+var provider = new firebase.auth.GoogleAuthProvider();
 
-// firebase.auth().languageCode = 'pt';
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-// provider.setCustomParameters({
-//     'login_hint': 'youremail@gmail.com'
-// });
-// firebase.auth().signInWithPopup(provider).then(function (result) {
-//     // This gives you a Google Access Token. You can use it to access the Google API.
-//     var token = result.credential.accessToken;
-//     // The signed-in user info.
-//     var user = result.user;
-//     // ...
-// }).catch(function (error) {
-//     // Handle Errors here.
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//     // The email of the user's account used.
-//     var email = error.email;
-//     // The firebase.auth.AuthCredential type that was used.
-//     var credential = error.credential;
-//     // Provides a notice of error with credentials/verification
-// });
+firebase.auth().languageCode = 'pt';
 
+provider.setCustomParameters({
+    'login_hint': 'youremail@gmail.com'
+});
+firebase.auth().signInWithPopup(provider).then(function (result) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+}).catch(function (error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // Provides a notice of error with credentials/verification
+});
+
+firebase.auth().signOut().then(function () {
+    // Sign-out successful.
+}).catch(function (error) {
+    // An error happened.
+});
+
+//MODAL AND THE GAMES CODE
+
+var highscore;
+var game;
 
 function removeElement(elementId) {
     // Removes an element from the document
@@ -40,6 +61,7 @@ var parentElement = document.getElementById("parent");
 
 // Get the button that opens the modal
 var btn = ""
+var CurrentGame = ""
 
 
 $(".myBtn").click(function () {
@@ -47,31 +69,47 @@ $(".myBtn").click(function () {
     btn = $(this);
     if (btn.val() == 1) {
         createSnake();
+        CurrentGame = "Snake"
     }
     else if (btn.val() == 2) {
         createT();
+        CurrentGame = "Tetris"
     }
     else if (btn.val() == 3) {
         createMemory();
+        CurrentGame = "Memory"
     }
     else if (btn.val() == 4) {
-        createRPG();
+        createWhack();
+        CurrentGame = "Whack-a-mole"
     }
-
+    console.log(CurrentGame)
 
 })
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
+    highscore = getGameHighScore();
+    console.log(CurrentGame)
+    UploadAndCheck(CurrentGame, highscore);
     removeElement("parent")
+
+
+
+
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
-        modal.style.display = "none";
-        removeElement("parent")
+        modal.style.display = "none";;
+        highscore = getGameHighScore();
+        console.log(highscore)
+        UploadAndCheck(CurrentGame, highscore);
+        removeElement("parent");
+
+
     }
 }
 // If you are using jQuery, use < $(document).ready(function(){ ... }) > instead
@@ -86,8 +124,7 @@ var createSnake = function () {
     };
     // Create the game object. The settings object is NOT required.
     // The parentElement however is required
-    var game = new SnakeJS(parentElement, settings);
-
+    game = new SnakeJS(parentElement, settings);
 };
 
 var createT = function () {
@@ -102,8 +139,9 @@ var createT = function () {
         <canvas id="canvas">\
         </canvas>\
     </div>'
-    tetrisCreate();
+    game = new TetrisJS();
 };
+
 
 var createMemory = function () {
     parentElement.innerHTML =
@@ -124,61 +162,66 @@ var createMemory = function () {
     runMemory();
 }
 
-var createRPG = function () {
-    parentElement.innerHTML =
-        '<nav>\
-            <article id="demo"></article>\
-        </nav>\
-        <div class="gameContainer2">\
-        <section id = "game-start-screen">\
-    <article class="logo"></article>\
-    <article class="start-menu">\
-                    <br>\
-                        <button id="start-game" class="main-menu">Start Game</button>\
-                        <br>\
-                            <button onclick="getLocation()" class="main-menu">Set Location</button>\
-                            <br>\
-                                <button type="button" onclick="difficulty()" class="main-menu">Submit\
-					<br> Difficulty</button>\
-                                    <br>\
-                                        <p>Select your difficulty\
-					<br> 1 - 10</p>\
-                                            <input id="number">\
-                                                <br>\
-                                                    <p id="test"></p>\
-            </article>\
-            </section>\
-            <section id="character-select-screen">\
-                                                <p class="select-button-contain">\
-                                                    <button id="char-select">Fight!</button>\
-                                                </p>\
-                                                <article id="team-character-select"></article>\
-                                                <article id="selected-characters">\
-                                                    <p>Selected Fighters</p>\
-                                                </article>\
-                                                <article>\
-                                                    <p class="description-menu">Choose up to two characters and rush into battle.</p>\
-                                                </article>\
-                                            </section>\
-                                            <section id="combat-arena">\
-                                                <article id="game-message"></article>\
-                                                <button onclick="reload()" class="reset">Try Again</button>\
-                                                <article id="player-section"></article>\
-                                                <articl id="enemy-section">\
-                                                </article>\
-                                                <article id="combat-menu">\
-                                                    <div class="moveset-container"></div>\
-                                                    <div class="enemy-menu"></div>\
-                                                    <div class="character-menu">\
-      <!--<button id="end-match">End Match</button>  Will be replaced, keeping for possible test use-->\
-			</article>\
-            </div>\
-            </section>\
-                    </div>'
+var createWhack = function () {
 
-    rpgCreate();
+    parentElement.innerHTML =
+
+        '<div class="gameContainer2">\
+        <h1>Whack-a-mole!\
+        <span class="score">0</span>\
+        </h1>\
+        <button id = "start">Whack It!</button>\
+        <div class="game">\
+            <div class="hole hole1">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole2">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole3">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole4">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole5">\
+                <div class="mole"></div>\
+            </div>\
+            <div class="hole hole6">\
+                <div class="mole"></div>\
+            </div>\
+        </div>\
+        </div>'
+    Whack();
+
+
 
 };
 
 
 
+
+
+var getGameHighScore = function () {
+
+    return game.getHighScore();
+
+}
+
+var UploadAndCheck = function (CurrentGame, highscore) {
+    var newScore = {
+        GameName: CurrentGame,
+        scoreHolder: "me",
+        score: highscore
+    };
+    $.post("/api/scores", newScore, getScores);
+}
+
+var games = [];
+
+function getScores() {
+    $.get("/api/scores", function (data) {
+        games = data;
+        console.log(games)
+    });
+}
