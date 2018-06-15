@@ -1,5 +1,10 @@
 // GOOGLE AUTH
+<<<<<<< HEAD
 
+=======
+var username = "";
+var loggedin = false;
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCMYryrvvx8YYsuZXFbopqiWs-Ipe3BOIQ",
@@ -10,11 +15,13 @@ var config = {
     messagingSenderId: "67111225887"
 };
 firebase.initializeApp(config);
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 var provider = new firebase.auth.GoogleAuthProvider();
 
 provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
+<<<<<<< HEAD
 firebase.auth().languageCode = 'pt';
 
 provider.setCustomParameters({
@@ -42,6 +49,64 @@ firebase.auth().signOut().then(function () {
 }).catch(function (error) {
     // An error happened.
 });
+=======
+firebase.auth().useDeviceLanguage();
+
+
+
+var uiConfig = {
+    callbacks: {
+      uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+      },
+        signInSuccess: function (currentUser, credential, redirectUrl) {
+            username = currentUser.displayName;
+            loggedin = true;
+            modal.style.display = "none";
+            removeElement("parent");
+            $("#signin").html("Log out")
+            return false;
+        }
+    },
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    signInFlow: 'popup',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
+    // Terms of service url.
+    tosUrl: '<your-tos-url>'
+  };
+
+$("#signin").click(function(){
+    if (loggedin == false) {
+        modal.style.display = "flex";
+        parentElement.innerHTML = 
+        '<div id="firebaseui-auth-container"></div>\
+        <div id="loader">Loading...</div>'
+        ui.start('#firebaseui-auth-container', uiConfig);
+    }
+    else if (loggedin == true){
+        firebase.auth().signOut().then(function () {
+            // Sign-out successful.
+            username = "";
+            loggedin = false;
+            $("#signin").html("Log in")
+            modal.style.display = "flex";
+            parentElement.innerHTML = "<p>You've logged out!</p>"
+        }).catch(function (error) {
+            // An error happened.
+        });
+
+    }
+
+})
+
+
+
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
 
 //MODAL AND THE GAMES CODE
 
@@ -83,12 +148,12 @@ $(".myBtn").click(function () {
         createWhack();
         CurrentGame = "Whack-a-mole"
     }
-    console.log(CurrentGame)
 
 })
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
+<<<<<<< HEAD
     modal.style.display = "none";
     highscore = getGameHighScore();
     console.log(CurrentGame)
@@ -98,16 +163,49 @@ span.onclick = function () {
 
 
 
+=======
+    if (CurrentGame != ""){
+        modal.style.display = "none";
+        highscore = getGameHighScore();
+        console.log(CurrentGame);
+        UploadAndCheck(CurrentGame, highscore, username);
+        removeElement("parent");
+        CurrentGame= "";
+    }
+    else {
+        modal.style.display = "none";
+        removeElement("parent");
+    }
+
+
+
+
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
+<<<<<<< HEAD
         modal.style.display = "none";;
         highscore = getGameHighScore();
         console.log(highscore)
         UploadAndCheck(CurrentGame, highscore);
         removeElement("parent");
+=======
+        if (CurrentGame != ""){
+            modal.style.display = "none";
+            highscore = getGameHighScore();
+            console.log(highscore)
+            UploadAndCheck(CurrentGame, highscore, username);
+            removeElement("parent");
+            CurrentGame= "";
+        }
+        else {
+            modal.style.display = "none";
+            removeElement("parent");
+        }
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
 
 
     }
@@ -165,6 +263,14 @@ var createMemory = function () {
 var createWhack = function () {
 
     parentElement.innerHTML =
+<<<<<<< HEAD
+=======
+        '<div id="pong"></div>\
+	<div class="panel">\
+		Move with [ UP ], [ DOWN ]\
+	</div>'
+    runPong();
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
 
         '<div class="gameContainer2">\
         <h1>Whack-a-mole!\
@@ -195,6 +301,7 @@ var createWhack = function () {
     Whack();
 
 
+<<<<<<< HEAD
 
 };
 
@@ -202,16 +309,22 @@ var createWhack = function () {
 
 
 
+=======
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
 var getGameHighScore = function () {
 
     return game.getHighScore();
 
 }
 
+<<<<<<< HEAD
 var UploadAndCheck = function (CurrentGame, highscore) {
+=======
+var UploadAndCheck = function (CurrentGame, highscore, player) {
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
     var newScore = {
         GameName: CurrentGame,
-        scoreHolder: "me",
+        scoreHolder: player,
         score: highscore
     };
     $.post("/api/scores", newScore, getScores);
@@ -222,6 +335,10 @@ var games = [];
 function getScores() {
     $.get("/api/scores", function (data) {
         games = data;
+<<<<<<< HEAD
         console.log(games)
+=======
+        
+>>>>>>> a5701a8a18b6ef1d88ad1ba9069f59301a3399cc
     });
 }
