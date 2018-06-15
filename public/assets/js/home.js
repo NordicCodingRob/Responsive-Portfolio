@@ -113,7 +113,7 @@ $(".myBtn").click(function () {
         createWhack();
         CurrentGame = "Whack-a-mole"
     }
-    
+
 
     else if (btn.val() == 5) {
         createFlappy();
@@ -260,7 +260,7 @@ var getGameHighScore = function () {
 var gameScores = [];
 
 var UploadAndCheck = function (CurrentGame, highscore, player) {
-    found = false; 
+    found = false;
     getScores();
     var newScore = {
         GameName: CurrentGame,
@@ -268,50 +268,66 @@ var UploadAndCheck = function (CurrentGame, highscore, player) {
         score: highscore
     };
     console.log(newScore.GameName)
-    setTimeout(function(){
-        
-        for (var i = 0; i < gameScores.length; i++){
-            if (CurrentGame === gameScores[i].GameName){
+    setTimeout(function () {
+
+        for (var i = 0; i < gameScores.length; i++) {
+            if (CurrentGame === gameScores[i].GameName) {
                 found = true;
-                console.log("highscore: " + gameScores[i].score +" VS currentScore: " + highscore)
-                if (highscore > gameScores[i].score){
+                console.log("highscore: " + gameScores[i].score + " VS currentScore: " + highscore)
+                if (highscore > gameScores[i].score) {
                     console.log(newScore);
                     updateScore(newScore);
-                    console.log("updated") 
+                    console.log("updated")
                     return true;
                 }
-                else{
+                else {
                     console.log("breaking")
                     break;
-                } 
+                }
             }
         }
-        if (found == false){
+        if (found == false) {
             console.log("posting")
-            $.post("/api/scores", newScore, getScores);
+            $.post("/api/scores", newScore, populateHighscores);
         }
-        
-        
+
+
     }, 500);
-    
+
 }
 
-
-var getScores = function() {
+var getScores = function () {
     $.get("/api/scores", function (data) {
         gameScores = data;
         return data;
     });
 }
 
-var updateScore = function(newScore) {
-    console.log(newScore.gameName)
+var updateScore = function (newScore) {
+    console.log(newScore.GameName)
     $.ajax({
-      method: "PUT",
-      url: "/api/scores",
-      data: newScore,
-      where: {
-        gameName: newScore.GameName
-      }
-    }).then(getScores());
-  }
+        method: "PUT",
+        url: "/api/scores",
+        data: newScore,
+        where: {
+            gameName: newScore.GameName
+        }
+    }).then(populateHighscores());
+}
+
+var populateHighscores = function (){
+    getScores();
+    setTimeout(function () {
+        console.log(gameScores)
+        for (var i = 0; i < gameScores.length; i++) {
+            console.log("test" + gameScores[i])
+            if(gameScores[i].GameName == "Snake"){$(".snake-highscore").html(gameScores[i].score)}
+            if(gameScores[i].GameName == "Tetris"){$(".tetris-highscore").html(gameScores[i].score)}
+            $(".memory-highscore").html(40)
+            $(".pong-highscore").html(35)
+            $(".whack-highscore").html(33)
+            $(".flappy-highscore").html(2)
+        }
+    },500);
+}
+populateHighscores();
