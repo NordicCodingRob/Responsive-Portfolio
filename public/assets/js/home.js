@@ -1,6 +1,5 @@
 // GOOGLE AUTH
-
-var username = "";
+var username = "Anon";
 var loggedin = false;
 
 // Initialize Firebase
@@ -60,7 +59,7 @@ $("#signin").click(function () {
     else if (loggedin == true) {
         firebase.auth().signOut().then(function () {
             // Sign-out successful.
-            username = "";
+            username = "Anon";
             loggedin = false;
             $("#signin").html("Log in")
             modal.style.display = "flex";
@@ -114,6 +113,7 @@ $(".myBtn").click(function () {
         createWhack();
         CurrentGame = "Whack-a-mole"
     }
+    
 
     else if (btn.val() == 5) {
         createFlappy();
@@ -127,7 +127,6 @@ span.onclick = function () {
     if (CurrentGame != "") {
         modal.style.display = "none";
         highscore = getGameHighScore();
-        console.log(CurrentGame);
         UploadAndCheck(CurrentGame, highscore, username);
         removeElement("parent");
         CurrentGame = "";
@@ -145,7 +144,6 @@ window.onclick = function (event) {
         if (CurrentGame != "") {
             modal.style.display = "none";
             highscore = getGameHighScore();
-            console.log(highscore)
             UploadAndCheck(CurrentGame, highscore, username);
             removeElement("parent");
             CurrentGame = "";
@@ -239,6 +237,7 @@ var createWhack = function () {
         </div>\
         </div>'
     Whack();
+<<<<<<< HEAD
 };
 
 var createFlappy = function () {
@@ -248,6 +247,8 @@ var createFlappy = function () {
         '<h3>FLORPY BORK!!!</h3>\
 <canvas id="canvas" width="288"\ height="512"></canvas>'
     flappy();
+=======
+>>>>>>> 2bb66315934bbe04cca4dcbdcde58198e3ca527b
 };
 
 
@@ -259,19 +260,61 @@ var getGameHighScore = function () {
 
 }
 
+var gameScores = [];
+
 var UploadAndCheck = function (CurrentGame, highscore, player) {
+    found = false; 
+    getScores();
     var newScore = {
         GameName: CurrentGame,
         scoreHolder: player,
         score: highscore
     };
-    $.post("/api/scores", newScore, getScores);
+    console.log(newScore.GameName)
+    setTimeout(function(){
+        
+        for (var i = 0; i < gameScores.length; i++){
+            if (CurrentGame === gameScores[i].GameName){
+                found = true;
+                console.log("highscore: " + gameScores[i].score +" VS currentScore: " + highscore)
+                if (highscore > gameScores[i].score){
+                    console.log(newScore);
+                    updateScore(newScore);
+                    console.log("updated") 
+                    return true;
+                }
+                else{
+                    console.log("breaking")
+                    break;
+                } 
+            }
+        }
+        if (found == false){
+            console.log("posting")
+            $.post("/api/scores", newScore, getScores);
+        }
+        
+        
+    }, 500);
+    
 }
 
-var games = [];
 
-function getScores() {
+var getScores = function() {
     $.get("/api/scores", function (data) {
-        games = data;
+        gameScores = data;
+        return data;
     });
 }
+
+var updateScore = function(newScore) {
+    console.log(newScore.gameName)
+    $.ajax({
+      method: "PUT",
+      url: "/api/scores",
+      data: newScore,
+      where: {
+        gameName: newScore.GameName
+      }
+    }).then(getScores());
+  }
