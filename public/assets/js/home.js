@@ -112,14 +112,14 @@ $(".myBtn").click(function () {
         CurrentGame = "Memory"
     }
     else if (btn.val() == 4) {
+    }
+    else if (btn.val() == 5) {
         createWhack();
         CurrentGame = "Whack-a-mole"
     }
-
-
-    else if (btn.val() == 5) {
+    else if (btn.val() == 6) {
         createFlappy();
-        CurrentGame = "flappy-bird"
+        CurrentGame = "Flappy Bird"
     }
 
 })
@@ -244,7 +244,6 @@ var createWhack = function () {
 var createFlappy = function () {
 
     parentElement.innerHTML =
-
         '<h3>FLORPY BORK!!!</h3>\
         <canvas id="canvas" width="288"\ height="512"></canvas>'
     flappy();
@@ -320,7 +319,6 @@ var updateScore = function (newScore) {
 var populateHighscores = function (){
     getScores();
     setTimeout(function () {
-        console.log(gameScores)
         for (var i = 0; i < gameScores.length; i++) {
             console.log("test" + gameScores[i])
             if(gameScores[i].GameName == "Snake"){$(".snake-highscore").html(gameScores[i].score)}
