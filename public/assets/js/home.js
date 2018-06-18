@@ -67,9 +67,7 @@ $("#signin").click(function () {
         }).catch(function (error) {
             // An error happened.
         });
-
     }
-
 })
 
 
@@ -211,7 +209,6 @@ var createMemory = function () {
 var createWhack = function () {
 
     parentElement.innerHTML =
-
         '<div class="gameContainer2">\
         <h1>Whack-a-mole!\
         <span class="score">0</span>\
@@ -245,17 +242,16 @@ var createFlappy = function () {
 
     parentElement.innerHTML =
         '<h3>FLORPY BORK!!!</h3>\
-        <canvas id="canvas" width="288"\ height="512"></canvas>'
-    flappy();
+        <canvas id="flappycanvas" width="288" height="512"></canvas>'
+    game = new FlappyJS();
+    console.log(game);
 };
 
 
 
 
 var getGameHighScore = function () {
-
     return game.getHighScore();
-
 }
 
 var gameScores = [];
@@ -326,7 +322,7 @@ var populateHighscores = function (){
             $(".memory-highscore").html(40)
             $(".pong-highscore").html(35)
             $(".whack-highscore").html(33)
-            $(".flappy-highscore").html(2)
+            if(gameScores[i].GameName == "Flappy Bird"){$(".tetris-highscore").html(gameScores[i].score)}
         }
     },500);
 }

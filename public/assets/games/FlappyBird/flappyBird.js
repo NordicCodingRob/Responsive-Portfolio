@@ -1,5 +1,5 @@
-function flappy() {
-    var cvs = document.getElementById("canvas");
+function FlappyJS(){
+    var cvs = document.getElementById("flappycanvas");
     var ctx = cvs.getContext("2d");
     // load images
     var bird = new Image();
@@ -7,12 +7,13 @@ function flappy() {
     var fg = new Image();
     var pipeNorth = new Image();
     var pipeSouth = new Image();
+    var highScore = 0;
 
-    bird.src = "images/bird.png";
-    bg.src = "images/bg.png";
-    fg.src = "images/fg.png";
-    pipeNorth.src = "images/pipeNorth.png";
-    pipeSouth.src = "images/pipeSouth.png";
+    bird.src = "assets/games/FlappyBird/images/bird.png";
+    bg.src = "assets/games/FlappyBird/images/bg.png";
+    fg.src = "assets/games/FlappyBird/images/fg.png";
+    pipeNorth.src = "assets/games/FlappyBird/images/pipeNorth.png";
+    pipeSouth.src = "assets/games/FlappyBird/images/pipeSouth.png";
 
     // some variables
 
@@ -31,8 +32,8 @@ function flappy() {
     var fly = new Audio();
     var scor = new Audio();
 
-    fly.src = "sounds/fly.mp3";
-    scor.src = "sounds/score.mp3";
+    fly.src = "assets/games/FlappyBird/sounds/fly.mp3";
+    scor.src = "assets/games/FlappyBird/sounds/score.mp3";
 
     // on key down
 
@@ -50,6 +51,10 @@ function flappy() {
     pipe[0] = {
         x : cvs.width,
         y : 0
+    };
+
+    var getHighScore = function(){
+        return score;
     };
 
     // draw images
@@ -77,7 +82,10 @@ function flappy() {
             // detect collision
             
             if( bX + bird.width >= pipe[i].x && bX <= pipe[i].x + pipeNorth.width && (bY <= pipe[i].y + pipeNorth.height || bY+bird.height >= pipe[i].y+constant) || bY + bird.height >=  cvs.height - fg.height){
-                location.reload(); // reload the page
+                removeElement("parent");
+                $("#parent").html("<br><h1>Game over</h1>");
+                score = getHighScore()
+                return score;
             }
             
             if(pipe[i].x == 5){
@@ -98,9 +106,12 @@ function flappy() {
         ctx.font = "20px Verdana";
         ctx.fillText("Score : "+score,10,cvs.height-20);
         
-        requestAnimationFrame(draw);
+        setTimeout(function(){requestAnimationFrame(draw)},00);
         
     }
+    
+    
 
     draw();
-}
+};
+
